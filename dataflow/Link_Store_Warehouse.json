@@ -3,10 +3,32 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
-			"sinks": [],
-			"transformations": [],
-			"script": ""
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "StoreSource",
+						"type": "DatasetReference"
+					},
+					"name": "HubStoreWarehouse"
+				}
+			],
+			"sinks": [
+				{
+					"name": "StoreWarehouse"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectTransformation"
+				},
+				{
+					"name": "DataConversion"
+				},
+				{
+					"name": "Exists1"
+				}
+			],
+			"script": "source(output(\n\t\tSTORE_ID as string,\n\t\tWAREHOUSE_ID as string,\n\t\tWAREHOUSE_NAME as string,\n\t\tWAREHOUSE_COUNTRY as string,\n\t\tWAREHOUSE_STATE as string,\n\t\tWAREHOUSE_CITY as string,\n\t\tWAREHOUSE_STREET_NUMBER as string,\n\t\tWAREHOUSE_STREET_NAME as string,\n\t\tWAREHOUSE_STREET_TYPE as string,\n\t\tWAREHOUSE_ZIP as string,\n\t\tSTORE_NAME as string,\n\t\tSTORE_COUNTRY as string,\n\t\tSTORE_COUNTY as string,\n\t\tSTORE_STATE as string,\n\t\tSTORE_CITY as string,\n\t\tSTORE_STREET_NUMBER as string,\n\t\tSTORE_STREET_NAME as string,\n\t\tSTORE_ZIP as string,\n\t\tNUMBER_EMPLOYEES as string,\n\t\tWORKING_HOURS as string,\n\t\tMANAGER_NAME as string,\n\t\tSALES_PERSON_ID as string,\n\t\tSALES_PERSON_TYP as string,\n\t\tSALES_PERSON_TITLE as string,\n\t\tSALES_PERSON_FIRST_NAME as string,\n\t\tSALES_PERSON_LAST_NAME as string,\n\t\tSALES_PERSON_SUFFIX as string,\n\t\tSALES_PERSON_EMAIL_ADDRESS as string,\n\t\tSALES_PERSON_PHONE_NUMBER as string,\n\t\tSALES_PERSON_PHONE_NUMBER_TYPE as string,\n\t\tSALES_QUOTA as string,\n\t\tSALES_PERSON_BONUS as string,\n\t\tCOMMISSION_PCT as string,\n\t\tSALES_YTD as string,\n\t\tSALES_LAST_YEAR as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> HubStoreWarehouse\nHubStoreWarehouse select(mapColumn(\n\t\tSTORE_ID,\n\t\tWAREHOUSE_ID\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTransformation\nSelectTransformation derive(LOAD_DTS = currentTimestamp(),\n\t\tREC_SRC = 'StoreWarehouse_Info') ~> DataConversion\nDataConversion exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nExists1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> StoreWarehouse"
 		}
 	}
 }
