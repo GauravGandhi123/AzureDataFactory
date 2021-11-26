@@ -1,0 +1,66 @@
+    1  git username
+    2  git --help
+    3  git config -global user.email "gaurav.gandhi@nagarro.com"
+    4  git config --global user.email "gaurav.gandhi@nagarro.com"
+    5  git config --global user.name "GauravGandhi123"
+    6  git branch
+    7  git status
+    8  git checkout -b testbranch
+    9  git branch
+   10  git status
+   11  git add -a
+   12  git status
+   13  git add --a
+   14  git status
+   15  git commit
+   16  git status
+   17  git commit "version 1"
+   18  git status
+   19  git commit -m "Version 1"
+   20  git status
+   21  git remote add orig https://github.com/GauravGandhi123/AzureDataFactory.git
+   22  git push
+   23  git push --set-upstream orig testbranch
+   24  git username 
+   25  git user.name 
+   26  git --config user.name 
+   27  git -config user.name 
+   28  git config user.name
+   29  git config user.email
+   30  git push --all orig
+   31  cd..
+   32  git config user.name
+   33  git config user.email
+   34  git clone https://github.com/GauravGandhi123/AzureDataFactory.git
+   35  git status
+   36  cd AzureDataFactory/
+   37  git branch
+   38  git status
+   39  git checkout -b testing123
+   40  git status
+   41  git branch
+   42  git status
+   43  git add
+   44  git add --a
+   45  git status
+   46  git commit -m "version 1"
+   47  git remote add origin https://github.com/GauravGandhi123/AzureDataFactory.git
+   48  git remote add orig https://github.com/GauravGandhi123/AzureDataFactory.git
+   49  git push 
+   50      git push --set-upstream origin testing123
+   51      git push --set-upstream origin testing123
+   52  git config -local credential -helper
+   53  git config -local credential.helper
+   54  git config -local credential.helper ""
+   55  git config --local credential.helper ""
+   56  git push --set-upstream origin testing123
+   57  git remote remove orig
+   58  git remote remove origin
+   59  git remote add orig https://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@github.com/GauravGandhi123/AzureDataFactory.git
+   60  git push --set-upstream orig testing123
+   61  git checkout main
+   62  git status
+   63  git pull https://github.com/GauravGandhi123/AzureDataFactory.git
+   64  git status
+   65  history
+   66  history >abc.txt
